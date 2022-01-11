@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HexColorPicker } from "react-colorful";
 import FontPicker from "font-picker-react";
 
 const API_KEY = "AIzaSyDkVLWc30wD640m3xeyFWQgx3s-lo_S5UA";
 
-export default function CustomDesign() {
-  const [colorBG, setColorBG] = useState("#ffffff");
-  const [colorText, setColorText] = useState("#000000");
-  const [colorLink, setColorLink] = useState("#0000EE");
-  const [headerFont, setHeaderFont] = useState("Open Sans");
-  const [bodyFont, setBodyFont] = useState("Roboto");
-
+export default function CustomDesign(props) {
+  const {colorBG, setColorBG, colorText, setColorText, colorLink, setColorLink, headerFont, setHeaderFont, bodyFont, setBodyFont} = props;
 
   return (
     <div className="custom-design">

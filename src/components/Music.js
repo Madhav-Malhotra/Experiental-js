@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function Music() {
-  const [audio, setAudio] = useState([]);
+export default function Music(props) {
+  const { setAudio } = props;
 
   const handleSelect = (e) => {
     setAudio(e.target.files);
@@ -16,6 +16,7 @@ export default function Music() {
         <input type="file" id="music-file" accept=".mp3" name="file" multiple onChange={handleSelect}/>
         <br />
       </div>
+      <hr />
     </div>
   )
 }

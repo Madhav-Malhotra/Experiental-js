@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function WelcomeScreen() {
-  const [welcomeTitle, setWelcomeTitle] = useState("");
-  const [welcomeButton, setWelcomeButton] = useState("");
+export default function WelcomeScreen(props) {
+  const {welcomeTitle, setWelcomeTitle, welcomeButton, setWelcomeButton} = props;
 
   return (
     <div className='welcome'>
