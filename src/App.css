@@ -1,0 +1,86 @@
+/* ========= GENERAL ========= */
+div.App {
+  margin: 0px 20px;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+h1 {
+  font-size: 3rem;
+}
+p, li, span, a, label {
+  font-family: 'Arial';
+}
+h1, h2, h3, h4 {
+  font-family: 'Verdana';
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-bottom: solid 2px black;
+}
+input[type="text"], textarea {
+  font-family: 'Arial';
+  font-size: 1rem;
+  border: none;
+  border-bottom: solid 2px rgb(100,100,100);
+  transition: 0.3s;
+  outline: none;
+}
+
+hr {
+  border: dashed 2px #ccc;
+  margin: 40px 0px;
+}
+
+/* ========== HEADER AND ARTICLE INPUT ============= */
+div.header {
+  text-align: center;
+}
+
+div.editor-class {
+  padding: 0px 15px;
+}
+
+div.wrapper-class {
+  max-width: 1000px;
+  border: solid 2px rgb(100,100,100);;
+  min-height: 300px;
+  transition: 0.3s;
+}
+
+div.wrapper-class:focus {
+  border-color: black;
+}
+
+div.rdw-dropdown-wrapper {
+  border: solid 1px black;
+}
+
+div.toolbar-class div.rdw-option-wrapper {
+  border: solid 1px black;
+}
+
+/* ========== COLOR PICKERS ============= */
+
+div.color-pickers {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+div.color-pickers > div.picker {
+  margin: 0px 20px;
+}
+
+input[type="file"] {
+  margin-left: 20px;
+  font-family: 'Arial';
+  font-size: 1rem;
+}
+
+div.preview-welcome {
+  text-align: center;
+  height: 300px;
+  border: solid 2px black;
+}

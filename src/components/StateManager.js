@@ -25,6 +25,7 @@ export default function StateManager() {
   const [welcomeButton, setWelcomeButton] = useState("");
   const welcomeProps = {welcomeTitle, setWelcomeTitle, welcomeButton, setWelcomeButton};
   const [audio, setAudio] = useState([]);
+  const previewProps = {articleBody: getHTML(articleBody), articleTitle, welcomeTitle, welcomeButton, colorBG, colorText};
 
   return (
     <div>
@@ -33,7 +34,7 @@ export default function StateManager() {
       <CustomDesign {...customProps}/>
       <WelcomeScreen {...welcomeProps}/>
       <Music setAudio={setAudio}/>
-      <Preview articleBody={getHTML(articleBody)} articleTitle={articleTitle} welcomeTitle={welcomeTitle} welcomeButton={welcomeButton}/>
+      <Preview {...previewProps}/>
     </div>
   )
 }
