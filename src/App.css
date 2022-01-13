@@ -61,7 +61,7 @@ div.toolbar-class div.rdw-option-wrapper {
   border: solid 1px black;
 }
 
-/* ========== COLOR PICKERS ============= */
+/* ========== COLOR PICKERS AND PREVIEWS ============= */
 
 div.color-pickers {
   display: flex;
@@ -79,8 +79,49 @@ input[type="file"] {
   font-size: 1rem;
 }
 
-div.preview-welcome {
+div.preview-welcome, div.preview-body {
   text-align: center;
   height: 300px;
+  max-width: 533px;
   border: solid 2px black;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
+
+div.preview-welcome {
+  align-items: center;
+  justify-content: center;
+}
+
+div.preview-welcome>h1 {
+  margin-top: 0;
+}
+
+div.preview-welcome > button {
+  background-color: rgba(0,0,0,0);
+  border: solid 1px;
+  padding: 5px 15px;
+  margin-top: 5px;
+}
+
+@media only screen and (min-width: 1120px) {
+  div.preview-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+div.preview-body>div.body-inner {
+  text-align: left;
+  padding: 0 125px 0 75px;
+}
+
+div.preview-body>div.body-inner h1 { font-size: 2rem; }
+div.preview-body>div.body-inner h2 { font-size: 1.4rem; }
+div.preview-body>div.body-inner h3 { font-size: 1rem; }
+div.preview-body>div.body-inner h4 { font-size: 0.8rem; }
+div.preview-body>div.body-inner p, div.preview-body>div.body-inner li, 
+  div.preview-body>div.body-inner label, div.preview-body>div.body-inner span, 
+  div.preview-body>div.body-inner a { font-size: 0.67em; }
