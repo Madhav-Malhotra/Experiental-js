@@ -9,10 +9,7 @@ export default function Preview(props) {
     color: props.colorText,
     borderColor: props.colorText,
   }
-  
-  const style = document.createElement('style');
-  style.innerHTML =  `div.body-inner h1, div.body-inner h2, div.body-inner h3, div.body-inner h4, div.body-inner h5, div.body-inner h6 {font-family: ${props.headerFont};} div.body-inner p, div.body-inner li, div.body-inner label, div.body-inner span, div.body-inner a {font-family: ${props.bodyFont};}`;
-  document.getElementsByTagName('head')[0].appendChild(style);
+  const insert = getStyled(props.articleBody, props.colorLink);
 
   return (
     <div className="preview">
@@ -25,11 +22,33 @@ export default function Preview(props) {
         <div className='preview-body' style={divStyles}>
           <div className='body-inner'>
             <h1 className='apply-font-header'>{props.articleTitle}</h1>
-            <div className="body-content" dangerouslySetInnerHTML={{__html: props.articleBody}}></div>
+            <div className="body-content" dangerouslySetInnerHTML={{__html: insert}}></div>
           </div>
+          {props.articleBody && <div className="side-headings">
+            <h5>Sections</h5>
+            <p><a style={{color: props.colorLink}} href='#preview'>Real Headings</a></p>
+            <p><a style={{color: props.colorLink}} href='#preview'>Will Be Added</a></p>
+            <p><a style={{color: props.colorLink}} href='#preview'>In this Sidebar</a></p>
+          </div>}
         </div>
       </div>
       <hr />
     </div>
   )
+}
+
+
+function getStyled(str, linkColor) {
+  str = str.replaceAll("<h1>", "<h1 class='apply-font-header'>");
+  str = str.replaceAll("<h2>", "<h2 class='apply-font-header'>");
+  str = str.replaceAll("<h3>", "<h3 class='apply-font-header'>");
+  str = str.replaceAll("<h4>", "<h4 class='apply-font-header'>");
+  str = str.replaceAll("<h5>", "<h5 class='apply-font-header'>");
+  str = str.replaceAll("<h6>", "<h6 class='apply-font-header'>");
+
+  str = str.replaceAll("<p>", "<p class='apply-font-body'>");
+  str = str.replaceAll("<label>", "<label class='apply-font-body'>");
+  str = str.replaceAll("<span>", "<span class='apply-font-body'>");
+  str = str.replaceAll("<a", `<a class='apply-font-body' style='color: ${linkColor};'`);
+  return str;
 }

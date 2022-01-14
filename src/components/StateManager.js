@@ -8,6 +8,7 @@ import CustomDesign from "./CustomDesign";
 import Music from "./Music";
 import WelcomeScreen from "./WelcomeScreen";
 import Preview from "./Preview";
+import Generate from "./Generate";
 
 export default function StateManager() {
   const [articleTitle, setArticleTitle] = useState("");
@@ -25,7 +26,9 @@ export default function StateManager() {
   const [welcomeButton, setWelcomeButton] = useState("");
   const welcomeProps = {welcomeTitle, setWelcomeTitle, welcomeButton, setWelcomeButton};
   const [audio, setAudio] = useState([]);
-  const previewProps = {articleBody: getHTML(articleBody), articleTitle, welcomeTitle, welcomeButton, colorBG, colorText, headerFont, bodyFont};
+  
+  const previewProps = {articleBody: getHTML(articleBody), articleTitle, welcomeTitle, welcomeButton, colorBG, colorText, colorLink, headerFont, bodyFont};
+  const allProps = {...previewProps, audio};
 
   return (
     <div>
@@ -35,6 +38,7 @@ export default function StateManager() {
       <WelcomeScreen {...welcomeProps}/>
       <Music setAudio={setAudio}/>
       <Preview {...previewProps}/>
+      <Generate {...allProps}/>
     </div>
   )
 }

@@ -61,7 +61,7 @@ div.toolbar-class div.rdw-option-wrapper {
   border: solid 1px black;
 }
 
-/* ========== COLOR PICKERS AND PREVIEWS ============= */
+/* ========== COLOR PICKERS ============= */
 
 div.color-pickers {
   display: flex;
@@ -79,16 +79,20 @@ input[type="file"] {
   font-size: 1rem;
 }
 
+/* ========== PREVIEWS ============= */
+
 div.preview-welcome, div.preview-body {
   text-align: center;
   height: 300px;
   max-width: 533px;
   border: solid 2px black;
   display: flex;
-  flex-direction: column;
   flex: 1;
   overflow: hidden;
 }
+
+div.preview-welcome { flex-direction: column; }
+div.preview-body { flex-direction: row; }
 
 div.preview-welcome {
   align-items: center;
@@ -115,13 +119,38 @@ div.preview-welcome > button {
 
 div.preview-body>div.body-inner {
   text-align: left;
-  padding: 0 125px 0 75px;
+  padding: 0 50px 0 75px;
+}
+
+div.preview-body>div.side-headings {
+  text-align: left;
+  min-width: 100px;
 }
 
 div.preview-body>div.body-inner h1 { font-size: 2rem; }
 div.preview-body>div.body-inner h2 { font-size: 1.4rem; }
 div.preview-body>div.body-inner h3 { font-size: 1rem; }
 div.preview-body>div.body-inner h4 { font-size: 0.8rem; }
-div.preview-body>div.body-inner p, div.preview-body>div.body-inner li, 
-  div.preview-body>div.body-inner label, div.preview-body>div.body-inner span, 
-  div.preview-body>div.body-inner a { font-size: 0.67em; }
+div.preview-body p, div.preview-body>div.body-inner li, 
+  div.preview-body>div.body-inner label, div.preview-body>div.body-inner span { font-size: 0.67em; }
+div.preview-body a { font-size: 1em; }
+
+div.generate {
+  text-align: center;
+}
+
+div.generate>button {
+  font-size: 1.5rem;
+  font-family: 'Verdana';
+  background-color: white;
+  border: solid 2px black;
+  padding: 5px 35px;
+  color: black;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+div.generate>button:hover {
+  background-color: black;
+  color:white;
+}
