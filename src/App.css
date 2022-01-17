@@ -120,6 +120,7 @@ div.preview-welcome > button {
 div.preview-body>div.body-inner {
   text-align: left;
   padding: 0 50px 0 75px;
+  max-width: 320px;
 }
 
 div.preview-body>div.side-headings {
