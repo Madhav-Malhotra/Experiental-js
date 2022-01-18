@@ -15,12 +15,15 @@ export default function generate(props) {
     </head><body></body></html>`;
   //Add article body to html
   h.querySelector("body").innerHTML = `<div class='welcome'><h1>${props.welcomeTitle}</h1><button>${props.welcomeButton}</button>
-    </div><div class='article'><h1 class='title'>${props.articleTitle}</h1>${props.articleBody}</div><div class='sections'></div>`;
+    </div><div class='article' id="article"><h1 class='title'>${props.articleTitle}</h1>${props.articleBody}</div><div class='sections'></div>`;
   //Add article sections to html
   h.querySelectorAll("body h1, body h2, body h3, body h4").forEach(el => addHREF(el));
   h.querySelector("body div.sections").innerHTML = getSections(h);
   //Add styles
   const s = getStyles(props);
+  //Add scripts
+  const sc = getScripts(props);
+  h.querySelector("body").appendChild(sc);
 
   //Save file
   zip.file('index.html', h.innerHTML);
@@ -83,9 +86,10 @@ function getStyles(props) {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
     }
 
-    p, label, span, li, pre {
+    p, label, span, li, pre, button {
       font-size: 1.2rem;
     }
     
@@ -102,6 +106,24 @@ function getStyles(props) {
       border-left: solid 7px ${props.colorText};
       padding-left: 21px;
     }
+
+    /* ================ FUNCTIONAL COMPONENTS =============== */
+    div.welcome>button {
+      background-color: rgba(0,0,0,0);
+      outline: none;
+      width: fit-content;
+      color: ${props.colorText};
+      padding: 10px 30px;
+      cursor: pointer;
+      border: solid 2px ${props.colorText};
+      transition: 0.3s;
+    }
+
+    div.welcome>button:hover {
+      background-color: ${props.colorText};
+      color: ${props.colorBG};
+      border-color: ${props.colorText};
+  }
   `
 };
 
@@ -115,4 +137,20 @@ function getSections(h) {
   let out = "<h5>Sections</h5>";
   links.forEach(el => out += (el));
   return out;
+}
+
+function getScripts(props) {
+  const sc = document.createElement("script");
+  sc.innerHTML = `
+    const welcomeButton = document.querySelector(".welcome button");
+    welcomeButton.addEventListener("click", () => {
+      const elHeight = document.querySelector("#article").offsetTop;
+      const id = setInterval(() => {
+        const current = window.scrollY;
+        if (current < elHeight) window.scrollTo(0,current+20)
+        else clearInterval(id);
+      }, 1);
+    });
+  `;
+  return sc;
 }
