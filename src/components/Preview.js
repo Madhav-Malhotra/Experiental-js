@@ -6,7 +6,8 @@ export default function Preview(props) {
     color: props.colorText
   };
   const buttonStyles = {
-    color: props.colorText,
+    backgroundColor: props.colorText,
+    color: props.colorBG,
     borderColor: props.colorText,
   }
   const insert = getStyled(props.articleBody, props.colorLink);

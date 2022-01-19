@@ -15,10 +15,13 @@ export default function generate(props) {
     </head><body></body></html>`;
   //Add article body to html
   h.querySelector("body").innerHTML = `<div class='welcome'><h1>${props.welcomeTitle}</h1><button>${props.welcomeButton}</button>
-    </div><div class='article' id="article"><h1 class='title'>${props.articleTitle}</h1>${props.articleBody}</div><div class='sections'></div>`;
+    </div><div class='article' id="article"><h1 class='title'>${props.articleTitle}</h1>${props.articleBody}</div>
+    <div class='sections'></div><div class='sound'></div>`;
   //Add article sections to html
   h.querySelectorAll("body h1, body h2, body h3, body h4").forEach(el => addHREF(el));
   h.querySelector("body div.sections").innerHTML = getSections(h);
+  //Add sound control
+  h.querySelector("body div.sound").innerHTML = "<button id='sound-button'>Sound Off</button>";
   //Add styles
   const s = getStyles(props);
   //Add scripts
@@ -49,7 +52,7 @@ function getStyles(props) {
     }
 
     h1, h2, h3, h4, h5, h6 { font-family: "${props.headerFont}"; }
-    p, a, li, span, label, blockquote { font-family: "${props.bodyFont}"; }
+    p, a, li, span, label, blockquote, button { font-family: "${props.bodyFont}"; }
 
     a {
       color: ${props.colorLink};
@@ -61,7 +64,7 @@ function getStyles(props) {
     }
 
     div.article {
-      padding-left: 10vw;
+      padding-left: 12vw;
       padding-right: 22vw;
     }
 
@@ -108,22 +111,30 @@ function getStyles(props) {
     }
 
     /* ================ FUNCTIONAL COMPONENTS =============== */
-    div.welcome>button {
-      background-color: rgba(0,0,0,0);
+    button {
       outline: none;
       width: fit-content;
-      color: ${props.colorText};
-      padding: 10px 30px;
       cursor: pointer;
       border: solid 2px ${props.colorText};
       transition: 0.3s;
-    }
-
-    div.welcome>button:hover {
       background-color: ${props.colorText};
       color: ${props.colorBG};
       border-color: ${props.colorText};
-  }
+    }
+    button:hover {
+      background-color: rgba(0,0,0,0);
+      color: ${props.colorText};
+      border-color: ${props.colorText};
+    }
+
+    div.welcome>button { padding: 10px 30px; }
+    button#sound-button { padding: 3px 10px; }
+
+    div.sound {
+      position: fixed;
+      bottom: 20px;
+      left: 10px;
+    }
   `
 };
 
@@ -141,8 +152,16 @@ function getSections(h) {
 
 function getScripts(props) {
   const sc = document.createElement("script");
+  const audioFiles = [];
+  for (let i = 0; i < props.audio.length; i++) {
+    const file = props.audio[i];
+    audioFiles.push(`music/${file.name}`);
+  }
+
   sc.innerHTML = `
     const welcomeButton = document.querySelector(".welcome button");
+    const soundButton = document.querySelector(".sound button");
+
     welcomeButton.addEventListener("click", () => {
       const elHeight = document.querySelector("#article").offsetTop;
       const id = setInterval(() => {
@@ -150,6 +169,20 @@ function getScripts(props) {
         if (current < elHeight) window.scrollTo(0,current+20)
         else clearInterval(id);
       }, 1);
+    });
+
+    let availableAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
+    let currentAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
+    function loadAudio() {
+      const rand = Math.floor(Math.random() * availableAudio.length);
+      const randAudio = new Audio(currentAudio[rand]);
+      currentAudio.splice(rand, 1);
+      if (currentAudio.length == 0) currentAudio = availableAudio;
+    }
+
+    soundButton.addEventListener("click", (e) => {
+      if (e.target.innerText === "Sound Off") e.target.innerText = "Sound On";
+      else if (e.target.innerText === "Sound On") e.target.innerText = "Sound Off";
     });
   `;
   return sc;
