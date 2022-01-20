@@ -159,9 +159,13 @@ function getScripts(props) {
   }
 
   sc.innerHTML = `
+    //Initialise variables
     const welcomeButton = document.querySelector(".welcome button");
     const soundButton = document.querySelector(".sound button");
+    let currentAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
+    let playing;
 
+    //Welcome scroll
     welcomeButton.addEventListener("click", () => {
       const elHeight = document.querySelector("#article").offsetTop;
       const id = setInterval(() => {
@@ -171,19 +175,30 @@ function getScripts(props) {
       }, 1);
     });
 
-    let availableAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
-    let currentAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
+    //Sound functions
     function loadAudio() {
-      const rand = Math.floor(Math.random() * availableAudio.length);
-      const randAudio = new Audio(currentAudio[rand]);
+      const rand = Math.floor(Math.random() * currentAudio.length);
+      playing = new Audio(currentAudio[rand]);
+      playing.play();
+      playing.onended = () => loadAudio();
       currentAudio.splice(rand, 1);
-      if (currentAudio.length == 0) currentAudio = availableAudio;
+      if (currentAudio.length == 0) currentAudio = JSON.parse(\`${JSON.stringify(audioFiles)}\`);
     }
 
     soundButton.addEventListener("click", (e) => {
-      if (e.target.innerText === "Sound Off") e.target.innerText = "Sound On";
-      else if (e.target.innerText === "Sound On") e.target.innerText = "Sound Off";
+      if (window.onloading) window.onloading = null;
+
+      if (e.target.innerText === "Sound Off") {
+        e.target.innerText = "Sound On";
+        if (!playing) loadAudio();
+        else playing.play();
+      }
+      else if (e.target.innerText === "Sound On") {
+        e.target.innerText = "Sound Off";
+        playing.pause();
+      }
     });
+    window.onclick = () => soundButton.click();
   `;
   return sc;
 }
