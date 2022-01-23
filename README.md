@@ -7,5 +7,5 @@ This is why I created this site. **It lets you create a HTML article with custom
 If you'd like to try it out, go [here](https://experiential-ly.web.app) :-)
 
 ----
-![Content Form](./preview/content.png)
-![Generate preview](./preview/generate.png)
+![Content Form](./preview/Content.png)
+![Generate preview](./preview/Generate.png)
